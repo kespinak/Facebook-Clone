@@ -8926,11 +8926,6 @@
     "klona" "^2.0.4"
     "neo-async" "^2.6.2"
 
-"sass-themify@^2.0.0":
-  "integrity" "sha512-2XUiF6brj7vcnHHJ4abxPJ3koR5caSjLi4niwlwtSNr14BBSEmq0a3kyfvdbrSp+cBjZLUHdHrnEzOS94x+J/Q=="
-  "resolved" "https://registry.npmjs.org/sass-themify/-/sass-themify-2.0.0.tgz"
-  "version" "2.0.0"
-
 "sass@^1.3.0", "sass@^1.58.0":
   "integrity" "sha512-PiMJcP33DdKtZ/1jSjjqVIKihoDc6yWmYr9K/4r3fVVIEDAluD0q7XZiRKrNJcPK3qkLRF/79DND1H5q1LBjgg=="
   "resolved" "https://registry.npmjs.org/sass/-/sass-1.58.0.tgz"
