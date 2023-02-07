@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/authContext';
 import './login.scss';
@@ -6,10 +6,29 @@ import './login.scss';
 
 const Login = () => {
 
+  const [inputs, setInputs] = useState({
+    username: '',
+    password: '',    
+  })
+
+  const [err, setErr] = useState(null);
+
+  const handleChange = (e) => {
+    setInputs(prev => ({...prev, [e.target.name] : e.target.value}));
+    // console.log(inputs)
+  };
+
   const {login} = useContext(AuthContext);
 
-  const handleLogin = () => {
-    login();
+  const handleLogin = async (e) => {
+    // login(); used for frontend
+    e.preventDefault()
+    try {
+      await login(inputs);
+    } catch (err) {
+      // console.log(err)
+      setErr(err.response.data);
+    }
   };
 
   return (
@@ -26,8 +45,10 @@ const Login = () => {
         <div className="right">
           <h1>Login</h1>
           <form>
-            <input type='text' placeholder='Username' />
-            <input type='text' placeholder='Password' />
+            <input type='text' placeholder='Username' name='username' onChange={handleChange} />
+            <input type='text' placeholder='Password' name='password' onChange={handleChange} />
+            {err && err}
+            {/* if there is error, then show error */}
             <button onClick={handleLogin}>Login</button>            
           </form>
         </div>
