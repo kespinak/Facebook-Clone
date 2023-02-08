@@ -9,6 +9,9 @@ import likeRoutes from './routes/likes.js'
 import express  from "express";
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
+import multer from 'multer'
+import moment from 'moment'
+
 
 const app = express();
 
@@ -31,6 +34,24 @@ app.use('/api/posts', postRoutes);
 app.use('/api/comments', commentRoutes);
 app.use('/api/likes', likeRoutes);
 // app.use("/api/relationships", relationshipRoutes);
+
+
+//* in the future, ill create a router for this multer
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, '../client/public/upload')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + file.originalname)
+  }
+})
+
+const upload = multer({ storage: storage })
+
+app.post('/api/upload', upload.single('file'), (req, res) => {
+  const file = req.file;
+  res.status(200).json(file.filename);
+});
 
 app.listen(8800, () => {
   console.log("API working!")
