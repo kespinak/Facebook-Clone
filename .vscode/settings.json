@@ -2,6 +2,8 @@
   "cSpell.words": [
     "middlewares",
     "secretkey",
-    "tanstack"
+    "secretkeythatshouldbeinaenv",
+    "tanstack",
+    "Textsms"
   ]
 }

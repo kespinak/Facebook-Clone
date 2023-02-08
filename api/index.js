@@ -1,4 +1,8 @@
 //! NOTE THAT CORES IS USING LOCALHOST: 3002 NOT 3001...I NEED TO KILL PORT 3000 AND SET IT TO 3000
+//! there is a bug where localhost:3000 is just blank...i need to rerun yarn start to get to localhost:3001 and it will work fine...
+// client -> yarn start -> 
+// api -> yarn start -> http://localhost:8800/api/users/test
+//axios error -> chrome console/axiosError/response/data/reference error
 
 import authRoutes from './routes/auth.js'
 import userRoutes from './routes/users.js'
