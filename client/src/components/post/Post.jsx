@@ -27,7 +27,7 @@ const Post = ({ post }) => {
       return res.data;
     })
   );
-  console.log(data);
+  // console.log('data from client>Post.jsx', data);
 
   const queryClient = useQueryClient();
   const mutation = useMutation(

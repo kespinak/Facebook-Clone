@@ -10,17 +10,16 @@
 //? 5- localhost:3001/profile/1 shows update but localhost:3001/profile/1 shows follow...NEVERMIND, I THINK THIS IS CORRECT
 
 
-import authRoutes from './routes/auth.js'
-import userRoutes from './routes/users.js'
-import postRoutes from './routes/posts.js'
-import commentRoutes from './routes/comments.js'
-import likeRoutes from './routes/likes.js'
-// import relationshipRoutes from './routes/relationships.js'
-import express  from "express";
-import cookieParser from 'cookie-parser'
-import cors from 'cors'
-import multer from 'multer'
-import moment from 'moment'
+import authRoutes from './routes/auth.js';
+import userRoutes from './routes/users.js';
+import postRoutes from './routes/posts.js';
+import commentRoutes from './routes/comments.js';
+import likeRoutes from './routes/likes.js';
+import relationshipRoutes from './routes/relationships.js';
+import express  from "express";;
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
+import multer from 'multer';
 
 
 const app = express();
@@ -43,7 +42,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/comments', commentRoutes);
 app.use('/api/likes', likeRoutes);
-// app.use("/api/relationships", relationshipRoutes);
+app.use('/api/relationships', relationshipRoutes);
 
 
 //* in the future, ill create a router for this multer
@@ -53,8 +52,8 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + file.originalname)
-  }
-})
+  },
+});
 
 const upload = multer({ storage: storage })
 
