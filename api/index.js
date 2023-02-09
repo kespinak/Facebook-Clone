@@ -9,6 +9,8 @@
 //? 4- making a comment needs a unique key of its own
 //? 5- localhost:3001/profile/1 shows update but localhost:3001/profile/1 shows follow...NEVERMIND, I THINK THIS IS CORRECT
 
+//* 6- 22301-NEW BUG SEE CHROME CONSOLE ERROR WHEN YOU CLICK ON UPDATE...CAN UPDATE A COMPONENT WHILE RENDERING ANOTHER COMPONENT...
+//* CHECK ON THE FOLLOWING WORKED FILES: Post.jsx, Posts.jsx, post.js, Update.jsx, users.js, user.js, Share.jsx, Profile.jsx, relationship.js
 
 import authRoutes from './routes/auth.js';
 import userRoutes from './routes/users.js';
