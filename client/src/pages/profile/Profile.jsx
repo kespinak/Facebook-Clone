@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './profile.scss';
 import FacebookTwoToneIcon from "@mui/icons-material/FacebookTwoTone";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -13,28 +13,33 @@ import Posts from '../../components/posts/Posts';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { makeRequest } from '../../axios';
 import { useLocation } from 'react-router-dom';
+import { AuthContext } from '../../context/authContext';
 
 const Profile = () => {
+
+  const { currentUser } = useContext(AuthContext);
   
-  const userId = useLocation.pathname.split('/')[2]
+  const userId = parseInt(useLocation().pathname.split('/')[2]);
   // I will use reactQuery instead of useEffect+Redux
   const { isLoading, error, data } = useQuery(["user"], () =>
     makeRequest.get("/users/find/" + userId).then((res) => {
       return res.data;
     })
   );
-  console.log(data)
+  // console.log(data)
+  // console.log(typeof(userId)); //outputs string
+  // console.log(typeof(currentUser.id)); //outputs number
 
   return (
     <div className='profile'>
-      <div className="images">
+      {isLoading ? 'loading' : <><div className="images">
         <img
-          src="https://images.pexels.com/photos/13440765/pexels-photo-13440765.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+          src={data.coverPic}
           alt=""
           className="cover"
         />
         <img
-          src="https://images.pexels.com/photos/14028501/pexels-photo-14028501.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+          src={data.profilePic}
           alt=""
           className="profilePic"
         />
@@ -61,18 +66,21 @@ const Profile = () => {
           </div>
 
           <div className="center">
-            <span>Kevin Espina</span>
+            <span>{data.name}</span>
             <div className="info">
               <div className="item">
                 <PlaceIcon />
-                <span>USA</span>
+                <span>{data.city}</span>
               </div>
               <div className="item">
                 <LanguageIcon />
-                <span>Kevin.dev</span>
+                <span>{data.website}</span>
               </div>
             </div>
-            <button>follow</button>
+            {userId === currentUser.id 
+              ? (<button>update</button>) 
+              : (<button>follow</button>)
+            }
           </div>
 
           <div className="right">
@@ -82,9 +90,9 @@ const Profile = () => {
 
         </div>
         <Posts /> 
-      </div>
+      </div></>}
     </div>
   )
 }
 
-export default Profile
+export default Profile;

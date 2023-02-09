@@ -1,6 +1,15 @@
-import express from "express"
+import express from "express";
+import jwt from 'jsonwebtoken';
+import { db } from '../connect.js';
 
 
-// const getUser = (request, response) => {
-//   //TODO
-// }
+export const getUser = (req, res) => {
+  const userId = req.params.userId;
+  const q = "SELECT * FROM users WHERE id=?";
+
+  db.query(q, [userId], (err, data) => {
+    if(err) return res.status(500).json(err)
+    const { password, ...info} = data[0];
+    return res.json(info);
+  });
+};
