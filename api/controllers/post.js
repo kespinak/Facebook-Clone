@@ -10,7 +10,6 @@ export const getPosts = (req, res) => {
   
   jwt.verify(token, 'secretkeythatshouldbeinaenv', (err, userInfo) => {
     if(err) return res.status(403).json('Token is not valid!')
-    
     // console.log('userId from api>controllers>post.js, userId');
   
     const q =

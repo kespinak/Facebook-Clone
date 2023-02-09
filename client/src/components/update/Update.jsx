@@ -43,14 +43,16 @@ const Update = ({setOpenUpdate, user}) => {
       },
     }
   );
+  // console.log('user from Update.jsx...go to profile/1 and update', user);
 
   const handleClick = async (e) => {
     e.preventDefault();
-    let coverUrl = user.coverPic;
-    let profileUrl = user.profilePic;
+    let coverUrl;
+    let profileUrl;
 
-    coverUrl = cover && await upload(cover)
-    profileUrl = profile && await upload(profile)
+    coverUrl = cover ? await upload(cover) : user.coverPic;
+    profileUrl = profile ? await upload(profile) : user.profilePic;
+    // console.log("coverUrl from Update.jsx", coverUrl);
 
     mutation.mutate({ ...texts, coverPic:coverUrl, profilePic:profileUrl });
     setOpenUpdate(false);
@@ -61,8 +63,8 @@ const Update = ({setOpenUpdate, user}) => {
     <div className='update'>
       Update
       <form>
-        <input type="file" />
-        <input type="file" />
+        <input type="file" onChange={e => setCover(e.target.files[0])} />
+        <input type="file" onChange={e => setProfile(e.target.files[0])} />
         <input type="text" name='name' onChange={handleChange}/>
         <input type="text" name='city' onChange={handleChange}/>
         <input type="text" name='website' onChange={handleChange}/>
