@@ -6,13 +6,6 @@ import { makeRequest } from '../../axios';
 
 const Posts = () => {
 
-  // I will use reactQuery instead of useEffect+Redux
-  const { isLoading, error, data } = useQuery(["posts"], () =>
-    makeRequest.get("/posts").then((res) => {
-      return res.data;
-    })
-  );
-
 
   //TEMPORARY INFO FOR FRONTEND
   // const posts = [
@@ -35,7 +28,13 @@ const Posts = () => {
   //   },
   // ];
 
-  console.log(data)
+  // I will use reactQuery instead of useEffect+Redux
+  const { isLoading, error, data } = useQuery(["posts"], () =>
+    makeRequest.get("/posts").then((res) => {
+      return res.data;
+    })
+  );
+  // console.log(data)
 
   return (
     <div className='posts'>

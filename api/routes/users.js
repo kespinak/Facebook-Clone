@@ -3,10 +3,12 @@ import express from "express";
 
 const router = express.Router()
 
-// router.get('/find/:userId', getUser)
+// for testing example:
+// http://localhost:8800/api/users/test
 router.get('/test', (request, response) => {
   response.send('it works!')
 });
+// router.get('/find/:userId', getUser)
 
 
 export default router;
